@@ -9,21 +9,40 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    agent
+}
+
+
 dependencies {
 // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server
     compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.12.0'
 // https://mvnrepository.com/artifact/org.testng/testng
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
 
+    agent "org.aspectj:aspectjweaver:1.8.0"
+    testCompile "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0"
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-1.2-api', version: '2.11.0'
+
 }
+
 task chromeTest(type:Test){
     systemProperty "driver","chrome"
+   // testLogging.showStandardStreams = true
     useTestNG(){
         suites "testNg.xml"
     }
 }
 task fireFoxTest(type:Test){
     systemProperty "driver","firefox"
+    useTestNG(){
+        suites "testNg.xml"
+    }
+}
+
+task browserStackTest(type:Test){
+    systemProperty "driver","browserStack"
     useTestNG(){
         suites "testNg.xml"
     }
