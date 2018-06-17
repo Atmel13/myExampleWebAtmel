@@ -30,12 +30,23 @@ public class DriverFactory {
             driver = new FirefoxDriver();
         }
 
-        else if ("browserStack".equals(name)) {
+        else if ("browserStack - Safari".equals(name)) {
 
             DesiredCapabilities capability = new DesiredCapabilities();
             capability.setPlatform(Platform.MAC);
-            capability.setBrowserName("Firefox");
-            capability.setVersion("57");
+            capability.setBrowserName("Safari");
+            capability.setVersion("7.1");
+            capability.setCapability("browserstack.debug", true);
+            System.out.println("Бразуерстак инициализация");
+            driver = new RemoteWebDriver(new URL(URLka), capability);
+        }
+
+        else if ("browserStack - Chrome".equals(name)) {
+
+            DesiredCapabilities capability = new DesiredCapabilities();
+            capability.setPlatform(Platform.WINDOWS);
+            capability.setBrowserName("Chrome");
+            capability.setVersion("66");
             capability.setCapability("browserstack.debug", true);
             System.out.println("Бразуерстак инициализация");
             driver = new RemoteWebDriver(new URL(URLka), capability);

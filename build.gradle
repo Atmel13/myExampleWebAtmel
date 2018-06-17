@@ -41,8 +41,15 @@ task fireFoxTest(type:Test){
     }
 }
 
-task browserStackTest(type:Test){
-    systemProperty "driver","browserStack"
+task browserStackTestChrome(type:Test){
+    systemProperty "driver","browserStack - Chrome"
+    useTestNG(){
+        suites "testNg.xml"
+    }
+}
+
+task browserStackTestSafari(type:Test){
+    systemProperty "driver","browserStack - Safari"
     useTestNG(){
         suites "testNg.xml"
     }
